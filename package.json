@@ -1,0 +1,14 @@
+{
+  "name": "wsm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/thebigbrain/stack-machine.git",
+  "author": "thebigbrain <uibrick@126.com>",
+  "license": "MIT",
+  "scripts": {
+    "as": "node ./node_modules/binaryen/bin/as.js"
+  },
+  "devDependencies": {
+    "binaryen": "^63.0.0-nightly.20190115"
+  }
+}
