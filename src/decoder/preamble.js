@@ -1,7 +1,7 @@
-const stream = require('stream');
+const { Transform } = require('stream');
 const logger = require('../base/logger');
 
-module.exports = class PreambleDecoder extends stream.Transform {
+module.exports = class PreambleDecoder extends Transform {
     constructor(options) {
         super(options);
     }

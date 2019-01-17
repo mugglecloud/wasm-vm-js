@@ -6,7 +6,7 @@
   "author": "thebigbrain <uibrick@126.com>",
   "license": "MIT",
   "scripts": {
-    "as": "node --experimental-modules ./tools/wast2wasm.js",
+    "as": "node ./tools/wast2wasm.js",
     "cli": "node ./tools/cli",
     "lcli": "node ./tools/node11.js ./tools/cli"
   },
