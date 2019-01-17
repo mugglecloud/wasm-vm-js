@@ -1,9 +1,8 @@
-const fs = require("fs");
 const path = require("path");
 
 async function run(args) {
-    let mod = path.resolve(__dirname, '../src', args.shift());
-    let cli = require(mod).cli;
+    let mod = path.resolve(__dirname, '../src', args.shift(), 'cli.js');
+    let cli = require(mod);
     await cli(...args);
 }
 
