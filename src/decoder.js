@@ -2,7 +2,10 @@ const stream = require('stream');
 const util = require('util');
 const fs = require('fs');
 
+const logger = require('./logger');
+
 const pipeline = util.promisify(stream.pipeline);
+
 
 class PreambleDecoder extends stream.Transform {
     constructor(options) {
@@ -10,8 +13,10 @@ class PreambleDecoder extends stream.Transform {
     }
 
     _transform(chunk, encode, callback) {
-        console.log(typeof chunk, encode);
-        callback(null, chunk);
+        let magic = chunk.readUInt32LE(0);
+        let version = chunk.readUInt32LE(4);
+        logger.logHex(magic, version);
+        callback(null, chunk.slice(8));
     }
 }
 
@@ -31,4 +36,4 @@ module.exports = {
     cli,
     decode,
     PreambleDecoder
-}
+};
