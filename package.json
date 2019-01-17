@@ -6,7 +6,8 @@
   "author": "thebigbrain <uibrick@126.com>",
   "license": "MIT",
   "scripts": {
-    "as": "node ./node_modules/binaryen/bin/as.js"
+    "as": "node --experimental-modules ./tools/wast2wasm.js",
+    "cli": "node ./tools/cli"
   },
   "devDependencies": {
     "binaryen": "^63.0.0-nightly.20190115"
