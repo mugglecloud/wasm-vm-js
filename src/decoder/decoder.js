@@ -11,6 +11,5 @@ async function decode(inputStream) {
 }
 
 module.exports = {
-  decode,
-  PreambleDecoder
+  decode
 };

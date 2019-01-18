@@ -1,4 +1,5 @@
 const path = require("path");
+require('../src/init');
 
 async function run(args) {
     let mod = path.resolve(__dirname, '../src', args.shift(), 'cli.js');
