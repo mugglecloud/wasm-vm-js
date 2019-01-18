@@ -1,4 +1,4 @@
-const pipeline = require('../base/pipeline');
+const pipeline = require('../common/pipeline');
 const PreambleDecoder = require('./preamble');
 const {SectionDecoder} = require('./section');
 

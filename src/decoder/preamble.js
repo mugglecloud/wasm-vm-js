@@ -1,5 +1,5 @@
 const {Transform} = require('stream');
-const logger = require('../base/logger');
+const logger = require('../common/logger').getLogger('decoder.preamble');
 
 module.exports = class PreambleDecoder extends Transform {
   constructor(options) {
@@ -9,7 +9,7 @@ module.exports = class PreambleDecoder extends Transform {
   _transform(chunk, encode, callback) {
     let magic = chunk.readUInt32LE(0);
     let version = chunk.readUInt32LE(4);
-    logger.logHex(magic, version);
+    logger.debug(`0x${magic.toString(16)}, 0x${version.toString(16)}`);
     callback(null, chunk.slice(8));
   }
 };

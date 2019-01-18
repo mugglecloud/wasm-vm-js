@@ -1,4 +1,5 @@
 const SectionClasses = require('./classes');
+const leb128 = require('../common/leb128');
 
 const SectionCode = {
   CUSTOM: 0,
@@ -19,6 +20,8 @@ class SectionPayload {
   constructor(name = '', data = Buffer.from([])) {
     this.name = name;
     this.data = data;
+
+    this.count = 0;
   }
 
   get length() {
@@ -30,6 +33,8 @@ class Section {
   constructor(id, payload) {
     this.id = id;
     this.payload = payload;
+
+    this.$buffer = null;
   }
 
   static createSection(id, name, payload) {
@@ -40,11 +45,23 @@ class Section {
   }
 
   decode() {
+    this.decodeCount();
     this.decodeImpl();
   }
 
   /**
+   * decode section count of entries, start section should override this
+   */
+  decodeCount() {
+    let buffer = this.payload.data;
+    let count = leb128.decode(buffer.slice(0, 4));
+    this.$buffer = buffer.slice(count.length);
+    this.count = count.value;
+  };
+
+  /**
    * abstract method, should be override.
+   * decode rest of section.
    */
   decodeImpl() {
     throw `Not Implemented: ${this.id}`;

@@ -1,6 +1,8 @@
 const {Transform} = require('stream');
-const leb128 = require('../base/leb128');
+const leb128 = require('../common/leb128');
 const {Section} = require('../sections/section');
+
+const logger = require('../common/logger').getLogger('decoder.section');
 
 class SectionDecoder extends Transform {
   constructor(options) {
@@ -27,7 +29,7 @@ class SectionDecoder extends Transform {
     let payload = buffer.slice(0, payloadDataSize);
     buffer = buffer.slice(payloadDataSize);
 
-    console.log(id, name, payload.length);
+    logger.debug(`code: ${id}, name: ${name}, length: ${payload.length}`);
 
     let sec = Section.createSection(id, name, payload);
     sec && sec.decode();
