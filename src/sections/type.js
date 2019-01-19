@@ -1,13 +1,13 @@
-const logger = require('../common/logger').getLogger('section.type');
 const {Section, SectionCode} = require('./section');
 const leb128 = require('../common/leb128');
 const {FunctionSignature} = require('./function');
+
+const logger = require('../common/logger').getLogger('section.type');
 
 class TypeSection extends Section {
   constructor(data) {
     super(SectionCode.TYPE, data);
 
-    this.count = 0;
     this.entries = [];
   }
 

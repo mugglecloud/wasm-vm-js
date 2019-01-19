@@ -35,6 +35,7 @@ class Section {
     this.payload = payload;
 
     this.$buffer = null;
+    this.count = 0;
   }
 
   static createSection(id, name, payload) {

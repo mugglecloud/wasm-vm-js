@@ -1,7 +1,7 @@
 const {Section, SectionCode} = require('./section');
 const leb128 = require('../common/leb128');
 
-const logger = require('../common/logger').getLogger('section.export');
+const logger = require('../common/logger').getLogger('section.code');
 
 
 class LocalEntry {
@@ -57,7 +57,6 @@ class CodeSection extends Section {
   constructor(data) {
     super(SectionCode.CODE, data);
 
-    this.count = 0;
     this.bodies = [];
   }
 

@@ -6,7 +6,6 @@ class FunctionSection extends Section {
   constructor(data) {
     super(SectionCode.FUNCTION, data);
 
-    this.count = 0;
     this.types = [];
   }
 

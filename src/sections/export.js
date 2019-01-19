@@ -1,15 +1,9 @@
 const {Section, SectionCode} = require('./section');
 const leb128 = require('../common/leb128');
+const {ExternalKind} = require('../core/lang-types');
 
 const logger = require('../common/logger').getLogger('section.export');
 
-
-const ExternalKind = {
-  FUNCTION: 0,
-  TABLE: 1,
-  MEMORY: 2,
-  GLOBAL: 3
-};
 
 class ExportEntry {
   constructor(field, externalKind, index) {
@@ -21,7 +15,6 @@ class ExportEntry {
   static decode(buffer) {
     const fieldLen = leb128.decode(buffer.slice(0, 4));
     buffer = buffer.slice(fieldLen.length);
-
     const fieldStr = buffer.toString('utf8', 0, fieldLen.value);
     buffer = buffer.slice(fieldLen.value);
 
@@ -40,7 +33,6 @@ class ExportSection extends Section {
   constructor(data) {
     super(SectionCode.EXPORT, data);
 
-    this.count = 0;
     this.entries = [];
   }
 
