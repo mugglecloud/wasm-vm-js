@@ -35,7 +35,11 @@ class Section {
     this.payload = payload;
 
     this.$buffer = null;
-    this.count = 0;
+    this.$wasmModule = null;
+  }
+
+  get count() {
+    return this.payload.count;
   }
 
   static createSection(id, name, payload) {
@@ -43,6 +47,14 @@ class Section {
     let cls = SectionClasses.get(id);
     if (!cls) return null;
     return new cls(data);
+  }
+
+  bindWasmModule(wasmModule) {
+    this.$wasmModule = wasmModule;
+  }
+
+  emit(type, ...args) {
+    if (this.$wasmModule) this.$wasmModule.emit(type, ...args);
   }
 
   decode() {
@@ -57,7 +69,7 @@ class Section {
     let buffer = this.payload.data;
     let count = leb128.decode(buffer.slice(0, 4));
     this.$buffer = buffer.slice(count.length);
-    this.count = count.value;
+    this.payload.count = count.value;
   };
 
   /**

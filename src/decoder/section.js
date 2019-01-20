@@ -7,6 +7,8 @@ const logger = require('../common/logger').getLogger('decoder.section');
 class SectionDecoder extends Transform {
   constructor(options) {
     super(options);
+
+    this.$wasmModule = options.wasmModule;
   }
 
   static decode(buffer) {
@@ -32,7 +34,10 @@ class SectionDecoder extends Transform {
     logger.debug(`code: ${id}, name: ${name}, length: ${payload.length}`);
 
     let sec = Section.createSection(id, name, payload);
-    sec && sec.decode();
+    if (sec) {
+      sec.bindWasmModule(this.$wasmModule);
+      sec.decode();
+    }
 
     return buffer;
   }

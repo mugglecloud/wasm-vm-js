@@ -80,6 +80,8 @@ class ImportSection extends Section {
       // logger.debug(entry.entry.moduleName, entry.entry.fieldName, entry.entry.externalKind, entry.entry.type);
       this.entries.push(entry.entry);
       buffer = entry.buffer;
+
+      this.emit('decode.import', entry.entry);
     }
 
     logger.debug(this.count, this.entries);
